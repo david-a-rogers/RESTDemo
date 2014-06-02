@@ -88,6 +88,7 @@
         newEntry[@"is_closed"] = entry[@"is_closed"];
         newEntry[@"location"] = entry[@"location"];
         newEntry[@"image_url"] = entry[@"image_url"];
+        newEntry[@"categories"] = entry[@"categories"];
         [trimmedBusinesses addObject: newEntry];
     }
     
