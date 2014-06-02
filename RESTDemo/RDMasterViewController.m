@@ -10,11 +10,13 @@
 
 #import "RDMasterViewController.h"
 #import "RDDetailViewController.h"
+#import "RDNearby.h"
 
 @interface RDMasterViewController () <CLLocationManagerDelegate> {
     NSMutableArray *_objects;
 }
 @property (strong, nonatomic) CLLocationManager* locationManager;
+@property (strong, nonatomic) RDNearby* nearby;
 @end
 
 @implementation RDMasterViewController
@@ -27,6 +29,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self initLocation];
+    self.nearby = [[RDNearby alloc] init];
+    //TODO: nil check
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
@@ -64,6 +68,8 @@
     NSLog(@"lat = %lf | long = %lf | lat acc = %lf | long acc = %lf",
           currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
           currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
+    [manager stopUpdatingLocation];
+    [self.nearby submit];
 
 }
 
