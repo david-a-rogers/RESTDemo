@@ -8,6 +8,7 @@
 
 #import "RDNearby.h"
 #import "OAuthConsumer.h"
+#import <CoreLocation/CoreLocation.h>
 
 
 #define CONSUMER_KEY @"CLZVEP5pyzrjyvUt5qJwvA"
@@ -39,8 +40,10 @@
 	return self;
 }
 
--(void) submit {
-    NSURL *URL = [NSURL URLWithString:@"http://api.yelp.com/v2/search?term=restaurants&location=new%20york"];
+-(void) submitLocation: (CLLocation*) currentLocation {
+    NSString* requestString = [NSString stringWithFormat: @"http://api.yelp.com/v2/search?ll=%lf,%lf", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
+    //NSURL *URL = [NSURL URLWithString:@"http://api.yelp.com/v2/search?term=restaurants&location=new%20york"];
+    NSURL *URL = [NSURL URLWithString:requestString];
     OAMutableURLRequest* request = [[OAMutableURLRequest alloc] initWithURL:URL
                                                                    consumer:self.AuthConsumer
                                                                       token:self.AuthToken
@@ -73,7 +76,31 @@
     NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData: self.connectionData options:NSJSONReadingMutableContainers error: &e];
     NSArray* businesses = jsonDict[@"businesses"];
     
-    //[self notify:kGHUnitWaitStatusSuccess forSelector:@selector(test)];
+    
+    // We only need a subset of all the stuff Yelp provides and we're going to have to store
+    // what we use for offline purposes. So lets trim it down now.
+    
+    NSMutableArray* trimmedBusinesses = [[NSMutableArray alloc] initWithCapacity: businesses.count];
+    for (NSDictionary* entry in businesses) {
+        NSMutableDictionary* newEntry = [[NSMutableDictionary alloc] initWithCapacity:10];
+        newEntry[@"name"] = entry[@"name"];
+        newEntry[@"distance"] = entry[@"distance"];
+        newEntry[@"is_closed"] = entry[@"is_closed"];
+        newEntry[@"location"] = entry[@"location"];
+        newEntry[@"image_url"] = entry[@"image_url"];
+        [trimmedBusinesses addObject: newEntry];
+    }
+    
+    
+    [trimmedBusinesses sortUsingComparator:^NSComparisonResult(id a, id b) {
+        NSDictionary* first = (NSDictionary*)a;
+        NSDictionary* second = (NSDictionary*)b;
+        return [first[@"distance"] compare: second[@"distance"]];
+    }];
+    
+    int __unused x = 42;
+    
+
 }
 
 

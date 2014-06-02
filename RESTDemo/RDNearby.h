@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class CLLocation;
+
 @interface RDNearby : NSObject
--(void) submit;
+-(void) submitLocation: (CLLocation*) currentLocation;
 
 @end
