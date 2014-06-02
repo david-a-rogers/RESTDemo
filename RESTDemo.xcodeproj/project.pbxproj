@@ -22,6 +22,7 @@
 		FC992CEB193C0B9A00D62C34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC992CCA193C0B9A00D62C34 /* UIKit.framework */; };
 		FC992CF3193C0B9A00D62C34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC992CF1193C0B9A00D62C34 /* InfoPlist.strings */; };
 		FC992CF5193C0B9A00D62C34 /* RESTDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC992CF4193C0B9A00D62C34 /* RESTDemoTests.m */; };
+		FCC76151193CCE0500B7160B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC76150193CCE0500B7160B /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		FC992CF0193C0B9A00D62C34 /* RESTDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RESTDemoTests-Info.plist"; sourceTree = "<group>"; };
 		FC992CF2193C0B9A00D62C34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FC992CF4193C0B9A00D62C34 /* RESTDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RESTDemoTests.m; sourceTree = "<group>"; };
+		FCC76150193CCE0500B7160B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC76151193CCE0500B7160B /* CoreLocation.framework in Frameworks */,
 				FC992CC9193C0B9A00D62C34 /* CoreGraphics.framework in Frameworks */,
 				FC992CCB193C0B9A00D62C34 /* UIKit.framework in Frameworks */,
 				FC992CC7193C0B9A00D62C34 /* Foundation.framework in Frameworks */,
@@ -104,6 +107,7 @@
 		FC992CC5193C0B9A00D62C34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCC76150193CCE0500B7160B /* CoreLocation.framework */,
 				FC992CC6193C0B9A00D62C34 /* Foundation.framework */,
 				FC992CC8193C0B9A00D62C34 /* CoreGraphics.framework */,
 				FC992CCA193C0B9A00D62C34 /* UIKit.framework */,
@@ -463,6 +467,7 @@
 				FC992CFA193C0B9A00D62C34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FC992CFB193C0B9A00D62C34 /* Build configuration list for PBXNativeTarget "RESTDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +476,7 @@
 				FC992CFD193C0B9A00D62C34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
