@@ -69,7 +69,7 @@
           currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
           currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
     [manager stopUpdatingLocation];
-    [self.nearby submit];
+    [self.nearby submitLocation: currentLocation];
 
 }
 
