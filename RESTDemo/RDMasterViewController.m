@@ -13,6 +13,7 @@
 #import "RDYelpNearby.h"
 #import "RDNearbyDelegate.h"
 #import "RDVenueCell.h"
+#import "RDIconDownloader.h"
 
 @interface RDMasterViewController () <CLLocationManagerDelegate> {
     NSMutableArray *_objects;
@@ -20,6 +21,8 @@
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) RDYelpNearby* nearby;
 @property (strong, nonatomic) RDVenueCollection* venueCollection;
+//Dictionary of RDIconDownloaders keyed by indexPath
+@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @end
 
 @implementation RDMasterViewController
@@ -31,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
+
     self.title = @"Locations";
     [self initLocation];
     self.nearby = [[RDYelpNearby alloc] init];
@@ -107,29 +112,25 @@
     } else {
         cell.open.text = @"open";
     }
-    UIImage* image = [UIImage imageWithData: [NSData dataWithContentsOfURL: venue.imageUrl]];
-    UIImage* sizedImage = [self resizeImage: image];
-    cell.imageView.image = sizedImage;
-    return cell;
-}
-
--(UIImage*) resizeImage: (UIImage*) image {
-    UIImage* newImage;
-    if (image.size.width != 48 || image.size.height != 48)
-	{
-        CGSize itemSize = CGSizeMake(48, 48);
-		UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0f);
-		CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-		[image drawInRect:imageRect];
-		newImage = UIGraphicsGetImageFromCurrentImageContext();
-		UIGraphicsEndImageContext();
+    
+    // Only load cached images; defer new downloads until scrolling ends
+    if (!venue.image)
+    {
+        if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
+        {
+            [self startIconDownload:venue forIndexPath:indexPath];
+        }
+        // if a download is deferred or in progress, return a placeholder image
+        cell.imageView.image = [UIImage imageNamed:@"Placeholder"];
     }
     else
     {
-        newImage = image;
+        cell.imageView.image = venue.image;
     }
-    return newImage;
+    
+    return cell;
 }
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
@@ -157,6 +158,62 @@
     return YES;
 }
 */
+
+#pragma mark - Deferred icon helpers
+
+- (void)startIconDownload:(RDVenue *)venue forIndexPath:(NSIndexPath *)indexPath
+{
+    RDIconDownloader* iconDownloader = [self.imageDownloadsInProgress objectForKey:indexPath];
+    if (iconDownloader == nil) {
+        iconDownloader = [[RDIconDownloader alloc] initWithVenue: venue andCompletionHandler: ^{
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            
+            // Display the newly loaded image
+            cell.imageView.image = venue.image;
+            // Remove the IconDownloader from the in progress list.
+            // This will result in it being deallocated.
+            [self.imageDownloadsInProgress removeObjectForKey:indexPath];
+            
+        }];
+        self.imageDownloadsInProgress[indexPath] = iconDownloader;
+        [iconDownloader startDownload];
+    }
+}
+
+- (void)loadImagesForOnscreenRows
+{
+    if (self.venueCollection.count > 0)
+    {
+        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+        for (NSIndexPath *indexPath in visiblePaths)
+        {
+            RDVenue* venue = self.venueCollection[indexPath.row];
+            
+            if (!venue.image)
+            {
+                [self startIconDownload:venue forIndexPath:indexPath];
+            }
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate)
+	{
+        [self loadImagesForOnscreenRows];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self loadImagesForOnscreenRows];
+}
+
+
+
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {

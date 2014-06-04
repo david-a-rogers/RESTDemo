@@ -22,6 +22,9 @@
 @property (strong, nonatomic) NSString* category;
 //TODO: address
 
+// Only available at runtime
+@property (strong, nonatomic) UIImage* image;
+
 +(RDVenue*) venueFromYelpDictionary: (NSDictionary*) yelpDictionary;
 
 @end

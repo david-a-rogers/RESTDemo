@@ -25,6 +25,7 @@
 		FCBDA64A193E4C2B00EDB470 /* RDVenueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */; };
 		FCBDA692193F687400EDB470 /* RDVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA691193F687400EDB470 /* RDVenue.m */; };
 		FCBDA695193F6EE400EDB470 /* RDVenueCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */; };
+		FCBDA698193F8D9800EDB470 /* RDIconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA697193F8D9800EDB470 /* RDIconDownloader.m */; };
 		FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6A193CF6FE00A08D0F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF47193CF6FE00A08D0F /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6B193CF6FE00A08D0F /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF49193CF6FE00A08D0F /* NSURL+Base.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -85,6 +86,8 @@
 		FCBDA691193F687400EDB470 /* RDVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenue.m; sourceTree = "<group>"; };
 		FCBDA693193F6EE400EDB470 /* RDVenueCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVenueCollection.h; sourceTree = "<group>"; };
 		FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenueCollection.m; sourceTree = "<group>"; };
+		FCBDA696193F8D9800EDB470 /* RDIconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDIconDownloader.h; sourceTree = "<group>"; };
+		FCBDA697193F8D9800EDB470 /* RDIconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDIconDownloader.m; sourceTree = "<group>"; };
 		FCC5CF44193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
 		FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
 		FCC5CF46193CF6FE00A08D0F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				FCBDA691193F687400EDB470 /* RDVenue.m */,
 				FCBDA693193F6EE400EDB470 /* RDVenueCollection.h */,
 				FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */,
+				FCBDA696193F8D9800EDB470 /* RDIconDownloader.h */,
+				FCBDA697193F8D9800EDB470 /* RDIconDownloader.m */,
 				FC992CE1193C0B9A00D62C34 /* Images.xcassets */,
 				FC992CCD193C0B9A00D62C34 /* Supporting Files */,
 			);
@@ -409,6 +414,7 @@
 				FC992CD3193C0B9A00D62C34 /* main.m in Sources */,
 				FC992CDD193C0B9A00D62C34 /* RDMasterViewController.m in Sources */,
 				FCC5CF77193CF6FE00A08D0F /* OAServiceTicket.m in Sources */,
+				FCBDA698193F8D9800EDB470 /* RDIconDownloader.m in Sources */,
 				FCC5CF73193CF6FE00A08D0F /* OAMutableURLRequest.m in Sources */,
 				FCC5CF71193CF6FE00A08D0F /* OADataFetcher.m in Sources */,
 				FCC5CF7C193CFA1000A08D0F /* RDYelpNearby.m in Sources */,

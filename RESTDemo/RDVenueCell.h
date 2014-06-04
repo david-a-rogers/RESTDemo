@@ -10,13 +10,10 @@
 
 @interface RDVenueCell : UITableViewCell
 
-
 @property (weak, nonatomic) IBOutlet UIImageView* iconView;
 @property (weak, nonatomic) IBOutlet UILabel* name;
 @property (weak, nonatomic) IBOutlet UILabel* distance;
 @property (weak, nonatomic) IBOutlet UILabel* category;
 @property (weak, nonatomic) IBOutlet UILabel* open;
-
-
 
 @end

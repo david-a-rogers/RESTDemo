@@ -60,6 +60,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
+    self.connectionData = nil;
     if (self.delegate != nil) {
         [self.delegate RDNearbyFinishedWithSuccess:NO andVenues:nil];
     }
@@ -81,9 +82,12 @@
     
     RDVenueCollection* newCollection = [RDVenueCollection venueCollectionFromYelp: businesses];
     
+    self.connectionData = nil;
+    
     if (self.delegate != nil) {
         [self.delegate RDNearbyFinishedWithSuccess:YES andVenues: newCollection];
     }
+    
 }
 
 
