@@ -78,6 +78,10 @@
     RDVenueCollection* newVenueCollection =  [[RDVenueCollection alloc] init];
     NSString* plistPath = [RDVenueCollection plistPath];
     NSArray* venueDictionaryArray = [NSArray arrayWithContentsOfFile: plistPath];
+    if (venueDictionaryArray == nil) {
+        return nil;
+    }
+    
     NSMutableArray* venueList = [[NSMutableArray alloc] initWithCapacity: venueDictionaryArray.count];
     for (NSDictionary* venueDictionary in venueDictionaryArray) {
         RDVenue* newVenue = [RDVenue venueFromVenueDictionary: venueDictionary];

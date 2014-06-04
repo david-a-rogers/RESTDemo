@@ -40,11 +40,35 @@
     [self initLocation];
     self.nearby = [[RDYelpNearby alloc] init];
     //TODO: nil check
+    [self loadFromPersistentData];
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+}
+
+- (void)loadFromPersistentData {
+    self.venueCollection = [RDVenueCollection readFromStorage];
+    
+    if (self.venueCollection == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"REST Demo"
+                                                        message: @"No saved venues to show"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    // terminate all pending download connections
+    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
+    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
+    [self.imageDownloadsInProgress removeAllObjects];
+    
+    // Save nearby data
+    //[self.tableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,12 +106,15 @@
 
 - (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(RDVenueCollection*) venueCollection {
     if (success) {
+        //Persist venu data
+        [venueCollection writeToStorage];
+        
         // terminate all pending download connections
         NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
         [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
         [self.imageDownloadsInProgress removeAllObjects];
         
-        // Save nearby data
+        // Use venue data
         self.venueCollection = venueCollection;
         [self.tableView reloadData];
     }

@@ -60,7 +60,7 @@
     dictionary[kVenueNameKey] = self.name;
     dictionary[kVenueDistanceKey] = self.distanceInMiles;
     dictionary[kVenueClosedKey] = self.isClosed;
-    dictionary[kVenueImageUrlKey] = self.imageUrl;
+    dictionary[kVenueImageUrlKey] = self.imageUrl.absoluteString;
     dictionary[kVenueCategoryKey] = self.category;
     return dictionary;
 }
@@ -74,7 +74,7 @@
     newVenue.name = venueDictionary[kVenueNameKey];
     newVenue.distanceInMiles = venueDictionary[kVenueDistanceKey];
     newVenue.isClosed = venueDictionary[kVenueClosedKey];
-    newVenue.imageUrl = venueDictionary[kVenueImageUrlKey];
+    newVenue.imageUrl = [NSURL URLWithString: venueDictionary[kVenueImageUrlKey]];
     newVenue.category = venueDictionary[kVenueCategoryKey];
 
     return newVenue;
