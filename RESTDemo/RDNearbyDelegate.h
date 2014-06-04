@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RDVenueCollection.h"
 
 @protocol RDNearbyDelegate <NSObject>
 
-- (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(NSArray*) venueArray;
+- (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(RDVenueCollection*) venueCollection;
 
 @end

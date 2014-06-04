@@ -1,5 +1,5 @@
 //
-//  RDNearby.m
+//  RDYelpNearby.m
 //  RESTDemo
 //
 //  Created by David A. Rogers on 6/2/14.
@@ -7,8 +7,10 @@
 //
 
 #import "RDYelpNearby.h"
+#import "RDVenueCollection.h"
 #import "OAuthConsumer.h"
 #import <CoreLocation/CoreLocation.h>
+
 
 
 #define CONSUMER_KEY @"CLZVEP5pyzrjyvUt5qJwvA"
@@ -42,7 +44,6 @@
 
 -(void) submitLocation: (CLLocation*) currentLocation {
     NSString* requestString = [NSString stringWithFormat: @"http://api.yelp.com/v2/search?ll=%lf,%lf", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
-    //NSURL *URL = [NSURL URLWithString:@"http://api.yelp.com/v2/search?term=restaurants&location=new%20york"];
     NSURL *URL = [NSURL URLWithString:requestString];
     OAMutableURLRequest* request = [[OAMutableURLRequest alloc] initWithURL:URL
                                                                    consumer:self.AuthConsumer
@@ -65,7 +66,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    //[_responseData setLength:0];
+    // Nothing needs to be done yet.
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -78,45 +79,11 @@
     NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData: self.connectionData options:NSJSONReadingMutableContainers error: &e];
     NSArray* businesses = jsonDict[@"businesses"];
     
-    
-    // We only need a subset of all the stuff Yelp provides and we're going to have to store
-    // what we use for offline purposes. So lets trim it down now.
-    
-    NSMutableArray* trimmedBusinesses = [[NSMutableArray alloc] initWithCapacity: businesses.count];
-    for (NSDictionary* entry in businesses) {
-        NSMutableDictionary* newEntry = [[NSMutableDictionary alloc] initWithCapacity:10];
-        newEntry[@"name"] = entry[@"name"];
-        newEntry[@"distance"] = entry[@"distance"];
-        newEntry[@"is_closed"] = entry[@"is_closed"];
-        newEntry[@"location"] = entry[@"location"];
-        newEntry[@"image_url"] = entry[@"image_url"];
-        // I cannot verify that there will always be an entry
-        // for categories, so protecting the result.
-        NSString* category = @"unknown venue type";
-        NSArray* categoryPairList = entry[@"categories"];
-        if (categoryPairList != nil) {
-            NSArray* categoryPair = categoryPairList[0];
-            if (categoryPair != nil) {
-                category = categoryPair[0];
-            }
-        }
-        newEntry[@"category"] = category;
-        
-        [trimmedBusinesses addObject: newEntry];
-    }
-    
-    
-    [trimmedBusinesses sortUsingComparator:^NSComparisonResult(id a, id b) {
-        NSDictionary* first = (NSDictionary*)a;
-        NSDictionary* second = (NSDictionary*)b;
-        return [first[@"distance"] compare: second[@"distance"]];
-    }];
+    RDVenueCollection* newCollection = [RDVenueCollection venueCollectionFromYelp: businesses];
     
     if (self.delegate != nil) {
-        [self.delegate RDNearbyFinishedWithSuccess:YES andVenues:trimmedBusinesses];
+        [self.delegate RDNearbyFinishedWithSuccess:YES andVenues: newCollection];
     }
-    
-
 }
 
 
