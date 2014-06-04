@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RDNearbyDelegate.h"
 
 @class CLLocation;
 
 @interface RDNearby : NSObject
+
+@property (weak, nonatomic) id<RDNearbyDelegate> delegate;
+
 -(void) submitLocation: (CLLocation*) currentLocation;
 
 @end

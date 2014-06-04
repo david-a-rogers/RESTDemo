@@ -59,7 +59,9 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
-    //[self notify:kGHUnitWaitStatusFailure forSelector:@selector(test)];
+    if (self.delegate != nil) {
+        [self.delegate RDNearbyFinishedWithSuccess:NO andVenues:nil];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -88,7 +90,18 @@
         newEntry[@"is_closed"] = entry[@"is_closed"];
         newEntry[@"location"] = entry[@"location"];
         newEntry[@"image_url"] = entry[@"image_url"];
-        newEntry[@"categories"] = entry[@"categories"];
+        // I cannot verify that there will always be an entry
+        // for categories, so protecting the result.
+        NSString* category = @"unknown venue type";
+        NSArray* categoryPairList = entry[@"categories"];
+        if (categoryPairList != nil) {
+            NSArray* categoryPair = categoryPairList[0];
+            if (categoryPair != nil) {
+                category = categoryPair[0];
+            }
+        }
+        newEntry[@"category"] = category;
+        
         [trimmedBusinesses addObject: newEntry];
     }
     
@@ -99,7 +112,9 @@
         return [first[@"distance"] compare: second[@"distance"]];
     }];
     
-    int __unused x = 42;
+    if (self.delegate != nil) {
+        [self.delegate RDNearbyFinishedWithSuccess:YES andVenues:trimmedBusinesses];
+    }
     
 
 }

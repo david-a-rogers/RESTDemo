@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RDNearbyDelegate.h"
 
-@interface RDMasterViewController : UITableViewController
+@interface RDMasterViewController : UITableViewController <RDNearbyDelegate>
 
 @end

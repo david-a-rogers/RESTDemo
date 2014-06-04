@@ -22,6 +22,8 @@
 		FC992CEB193C0B9A00D62C34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC992CCA193C0B9A00D62C34 /* UIKit.framework */; };
 		FC992CF3193C0B9A00D62C34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC992CF1193C0B9A00D62C34 /* InfoPlist.strings */; };
 		FC992CF5193C0B9A00D62C34 /* RESTDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC992CF4193C0B9A00D62C34 /* RESTDemoTests.m */; };
+		FCBDA64A193E4C2B00EDB470 /* RDVenueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */; };
+		FCBDA692193F687400EDB470 /* RDVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA691193F687400EDB470 /* RDVenue.m */; };
 		FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6A193CF6FE00A08D0F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF47193CF6FE00A08D0F /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6B193CF6FE00A08D0F /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF49193CF6FE00A08D0F /* NSURL+Base.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -75,6 +77,11 @@
 		FC992CF0193C0B9A00D62C34 /* RESTDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RESTDemoTests-Info.plist"; sourceTree = "<group>"; };
 		FC992CF2193C0B9A00D62C34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FC992CF4193C0B9A00D62C34 /* RESTDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RESTDemoTests.m; sourceTree = "<group>"; };
+		FCBDA648193E4C2B00EDB470 /* RDVenueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVenueCell.h; sourceTree = "<group>"; };
+		FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenueCell.m; sourceTree = "<group>"; };
+		FCBDA68F193E7DB100EDB470 /* RDNearbyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNearbyDelegate.h; sourceTree = "<group>"; };
+		FCBDA690193F687400EDB470 /* RDVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVenue.h; sourceTree = "<group>"; };
+		FCBDA691193F687400EDB470 /* RDVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenue.m; sourceTree = "<group>"; };
 		FCC5CF44193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
 		FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
 		FCC5CF46193CF6FE00A08D0F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -183,10 +190,15 @@
 				FC992CDC193C0B9A00D62C34 /* RDMasterViewController.m */,
 				FC992CDE193C0B9A00D62C34 /* RDDetailViewController.h */,
 				FC992CDF193C0B9A00D62C34 /* RDDetailViewController.m */,
+				FCBDA648193E4C2B00EDB470 /* RDVenueCell.h */,
+				FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */,
 				FCC5CF7A193CFA1000A08D0F /* RDNearby.h */,
 				FCC5CF7B193CFA1000A08D0F /* RDNearby.m */,
 				FC992CE1193C0B9A00D62C34 /* Images.xcassets */,
 				FC992CCD193C0B9A00D62C34 /* Supporting Files */,
+				FCBDA68F193E7DB100EDB470 /* RDNearbyDelegate.h */,
+				FCBDA690193F687400EDB470 /* RDVenue.h */,
+				FCBDA691193F687400EDB470 /* RDVenue.m */,
 			);
 			path = RESTDemo;
 			sourceTree = "<group>";
@@ -398,6 +410,8 @@
 				FCC5CF6D193CF6FE00A08D0F /* hmac.c in Sources */,
 				FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */,
 				FC992CE0193C0B9A00D62C34 /* RDDetailViewController.m in Sources */,
+				FCBDA692193F687400EDB470 /* RDVenue.m in Sources */,
+				FCBDA64A193E4C2B00EDB470 /* RDVenueCell.m in Sources */,
 				FCC5CF74193CF6FE00A08D0F /* OAPlaintextSignatureProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
