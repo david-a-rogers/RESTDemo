@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol RDNearbyDelegate <NSObject>
+
 - (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(NSArray*) venueArray;
+
 @end

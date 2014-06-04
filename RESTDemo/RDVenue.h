@@ -16,7 +16,7 @@
 
 
 @property (strong, nonatomic) NSString* name;
-@property (strong, nonatomic) NSNumber* distanceMiles;
+@property (strong, nonatomic) NSNumber* distanceInMiles;
 @property (strong, nonatomic) NSNumber* isClosed;
 @property (strong, nonatomic) NSURL* imageUrl;
 @property (strong, nonatomic) NSString* category;

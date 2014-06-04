@@ -24,6 +24,7 @@
 		FC992CF5193C0B9A00D62C34 /* RESTDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC992CF4193C0B9A00D62C34 /* RESTDemoTests.m */; };
 		FCBDA64A193E4C2B00EDB470 /* RDVenueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */; };
 		FCBDA692193F687400EDB470 /* RDVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA691193F687400EDB470 /* RDVenue.m */; };
+		FCBDA695193F6EE400EDB470 /* RDVenueCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */; };
 		FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6A193CF6FE00A08D0F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF47193CF6FE00A08D0F /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6B193CF6FE00A08D0F /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF49193CF6FE00A08D0F /* NSURL+Base.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -82,6 +83,8 @@
 		FCBDA68F193E7DB100EDB470 /* RDNearbyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNearbyDelegate.h; sourceTree = "<group>"; };
 		FCBDA690193F687400EDB470 /* RDVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVenue.h; sourceTree = "<group>"; };
 		FCBDA691193F687400EDB470 /* RDVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenue.m; sourceTree = "<group>"; };
+		FCBDA693193F6EE400EDB470 /* RDVenueCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVenueCollection.h; sourceTree = "<group>"; };
+		FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenueCollection.m; sourceTree = "<group>"; };
 		FCC5CF44193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
 		FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
 		FCC5CF46193CF6FE00A08D0F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -194,11 +197,13 @@
 				FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */,
 				FCC5CF7A193CFA1000A08D0F /* RDNearby.h */,
 				FCC5CF7B193CFA1000A08D0F /* RDNearby.m */,
-				FC992CE1193C0B9A00D62C34 /* Images.xcassets */,
-				FC992CCD193C0B9A00D62C34 /* Supporting Files */,
 				FCBDA68F193E7DB100EDB470 /* RDNearbyDelegate.h */,
 				FCBDA690193F687400EDB470 /* RDVenue.h */,
 				FCBDA691193F687400EDB470 /* RDVenue.m */,
+				FCBDA693193F6EE400EDB470 /* RDVenueCollection.h */,
+				FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */,
+				FC992CE1193C0B9A00D62C34 /* Images.xcassets */,
+				FC992CCD193C0B9A00D62C34 /* Supporting Files */,
 			);
 			path = RESTDemo;
 			sourceTree = "<group>";
@@ -394,6 +399,7 @@
 				FCC5CF72193CF6FE00A08D0F /* OAHMAC_SHA1SignatureProvider.m in Sources */,
 				FCC5CF6B193CF6FE00A08D0F /* NSURL+Base.m in Sources */,
 				FCC5CF6A193CF6FE00A08D0F /* NSString+URLEncoding.m in Sources */,
+				FCBDA695193F6EE400EDB470 /* RDVenueCollection.m in Sources */,
 				FCC5CF75193CF6FE00A08D0F /* OAProblem.m in Sources */,
 				FCC5CF79193CF6FE00A08D0F /* OATokenManager.m in Sources */,
 				FCC5CF70193CF6FE00A08D0F /* OAConsumer.m in Sources */,
