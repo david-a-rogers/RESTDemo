@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RDVenue.h"
 
 
 /*!
@@ -16,6 +17,9 @@
 
 // writetostorage
 // readfromstorage
+
+- (NSUInteger)count;
+- (RDVenue*)objectAtIndexedSubscript:(NSUInteger)idx;
 
 +(RDVenueCollection*) venueCollectionFromYelp: (NSArray*) yelpCollection;
 

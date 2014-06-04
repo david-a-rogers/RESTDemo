@@ -7,7 +7,6 @@
 //
 
 #import "RDVenueCollection.h"
-#import "RDVenue.h"
 
 
 @interface RDVenueCollection ()
@@ -17,6 +16,13 @@
 
 @implementation RDVenueCollection
 
+- (NSUInteger)count {
+    return self.venueList.count;
+}
+
+- (RDVenue*)objectAtIndexedSubscript:(NSUInteger)idx {
+    return self.venueList[idx];
+}
 
 +(RDVenueCollection*) venueCollectionFromYelp: (NSArray*) yelpCollection {
     RDVenueCollection* newVenueCollection =  [[RDVenueCollection alloc] init];
@@ -28,6 +34,13 @@
         RDVenue* newVenue = [RDVenue venueFromYelpDictionary:yelpDictionary];
         [newVenueList addObject: newVenue];
     }
+    
+    // venues must be sorted by distance
+    
+    [newVenueList sortUsingComparator:^NSComparisonResult(RDVenue* first, RDVenue* second) {
+        return [first.distanceInMiles compare: second.distanceInMiles];
+    }];
+
     newVenueCollection.venueList = newVenueList;
     return newVenueCollection;
 }
