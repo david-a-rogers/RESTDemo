@@ -82,6 +82,11 @@
 
 - (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(RDVenueCollection*) venueCollection {
     if (success) {
+        // terminate all pending download connections
+        NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
+        [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
+        [self.imageDownloadsInProgress removeAllObjects];
+        
         // Save nearby data
         self.venueCollection = venueCollection;
         [self.tableView reloadData];

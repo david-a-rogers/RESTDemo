@@ -25,7 +25,9 @@
 // Only available at runtime
 @property (strong, nonatomic) UIImage* image;
 
+-(NSDictionary*) toVenueDictionary;
 +(RDVenue*) venueFromYelpDictionary: (NSDictionary*) yelpDictionary;
++(RDVenue*) venueFromVenueDictionary: (NSDictionary*) venueDictionary;
 
 @end
 

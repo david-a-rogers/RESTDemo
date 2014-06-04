@@ -15,12 +15,12 @@
  */
 @interface RDVenueCollection : NSObject
 
-// writetostorage
 // readfromstorage
 
 - (NSUInteger)count;
 - (RDVenue*)objectAtIndexedSubscript:(NSUInteger)idx;
-
-+(RDVenueCollection*) venueCollectionFromYelp: (NSArray*) yelpCollection;
+- (BOOL)writeToStorage;
++ (RDVenueCollection*)readFromStorage;
++ (RDVenueCollection*)venueCollectionFromYelp: (NSArray*) yelpCollection;
 
 @end
