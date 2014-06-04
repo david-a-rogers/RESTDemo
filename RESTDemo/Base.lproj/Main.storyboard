@@ -71,11 +71,11 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="category" destination="t2t-bk-meS" id="HO8-ZQ-csa"/>
                                     <outlet property="distance" destination="F0Y-Zq-MCK" id="90M-Np-Plh"/>
                                     <outlet property="iconView" destination="CXk-na-RzU" id="cwh-v3-cZ3"/>
                                     <outlet property="name" destination="9eo-iA-qzg" id="yV8-Zp-6PK"/>
                                     <outlet property="open" destination="gPI-Uo-Ebu" id="nBr-sz-hRQ"/>
-                                    <outlet property="type" destination="t2t-bk-meS" id="lpB-H8-A3i"/>
                                     <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="jUr-3t-vfg"/>
                                 </connections>
                             </tableViewCell>

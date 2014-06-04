@@ -62,9 +62,9 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation* currentLocation = [locations lastObject];
-    NSLog(@"lat = %lf | long = %lf | lat acc = %lf | long acc = %lf",
-          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
-          currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
+//    NSLog(@"lat = %lf | long = %lf | lat acc = %lf | long acc = %lf",
+//          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
+//          currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
     [manager stopUpdatingLocation];
     self.nearby.delegate = self;
     [self.nearby submitLocation: currentLocation];
@@ -101,7 +101,7 @@
     RDVenue* venue = self.venueCollection[indexPath.row];
     cell.name.text = venue.name;
     cell.distance.text = [NSString stringWithFormat: @"%0.2lf miles", venue.distanceInMiles.doubleValue];
-    cell.type.text = venue.category;
+    cell.category.text = venue.category;
     if (venue.isClosed.boolValue) {
         cell.open.text = @"closed";
     } else {
