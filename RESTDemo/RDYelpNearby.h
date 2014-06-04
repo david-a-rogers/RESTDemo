@@ -11,7 +11,7 @@
 
 @class CLLocation;
 
-@interface RDNearby : NSObject
+@interface RDYelpNearby : NSObject
 
 @property (weak, nonatomic) id<RDNearbyDelegate> delegate;
 

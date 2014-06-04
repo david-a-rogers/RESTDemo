@@ -10,7 +10,7 @@
 
 #import "RDMasterViewController.h"
 #import "RDDetailViewController.h"
-#import "RDNearby.h"
+#import "RDYelpNearby.h"
 #import "RDNearbyDelegate.h"
 #import "RDVenueCell.h"
 
@@ -18,7 +18,7 @@
     NSMutableArray *_objects;
 }
 @property (strong, nonatomic) CLLocationManager* locationManager;
-@property (strong, nonatomic) RDNearby* nearby;
+@property (strong, nonatomic) RDYelpNearby* nearby;
 @property (strong, nonatomic) NSArray* venueArray;
 @end
 
@@ -33,7 +33,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.title = @"Locations";
     [self initLocation];
-    self.nearby = [[RDNearby alloc] init];
+    self.nearby = [[RDYelpNearby alloc] init];
     //TODO: nil check
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;

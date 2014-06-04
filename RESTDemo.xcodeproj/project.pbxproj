@@ -42,7 +42,7 @@
 		FCC5CF77193CF6FE00A08D0F /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF62193CF6FE00A08D0F /* OAServiceTicket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF78193CF6FE00A08D0F /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF65193CF6FE00A08D0F /* OAToken.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF79193CF6FE00A08D0F /* OATokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF67193CF6FE00A08D0F /* OATokenManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FCC5CF7C193CFA1000A08D0F /* RDNearby.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF7B193CFA1000A08D0F /* RDNearby.m */; };
+		FCC5CF7C193CFA1000A08D0F /* RDYelpNearby.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF7B193CFA1000A08D0F /* RDYelpNearby.m */; };
 		FCC76151193CCE0500B7160B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC76150193CCE0500B7160B /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,8 +121,8 @@
 		FCC5CF66193CF6FE00A08D0F /* OATokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATokenManager.h; sourceTree = "<group>"; };
 		FCC5CF67193CF6FE00A08D0F /* OATokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OATokenManager.m; sourceTree = "<group>"; };
 		FCC5CF68193CF6FE00A08D0F /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
-		FCC5CF7A193CFA1000A08D0F /* RDNearby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNearby.h; sourceTree = "<group>"; };
-		FCC5CF7B193CFA1000A08D0F /* RDNearby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDNearby.m; sourceTree = "<group>"; };
+		FCC5CF7A193CFA1000A08D0F /* RDYelpNearby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDYelpNearby.h; sourceTree = "<group>"; };
+		FCC5CF7B193CFA1000A08D0F /* RDYelpNearby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDYelpNearby.m; sourceTree = "<group>"; };
 		FCC76150193CCE0500B7160B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -195,8 +195,8 @@
 				FC992CDF193C0B9A00D62C34 /* RDDetailViewController.m */,
 				FCBDA648193E4C2B00EDB470 /* RDVenueCell.h */,
 				FCBDA649193E4C2B00EDB470 /* RDVenueCell.m */,
-				FCC5CF7A193CFA1000A08D0F /* RDNearby.h */,
-				FCC5CF7B193CFA1000A08D0F /* RDNearby.m */,
+				FCC5CF7A193CFA1000A08D0F /* RDYelpNearby.h */,
+				FCC5CF7B193CFA1000A08D0F /* RDYelpNearby.m */,
 				FCBDA68F193E7DB100EDB470 /* RDNearbyDelegate.h */,
 				FCBDA690193F687400EDB470 /* RDVenue.h */,
 				FCBDA691193F687400EDB470 /* RDVenue.m */,
@@ -411,7 +411,7 @@
 				FCC5CF77193CF6FE00A08D0F /* OAServiceTicket.m in Sources */,
 				FCC5CF73193CF6FE00A08D0F /* OAMutableURLRequest.m in Sources */,
 				FCC5CF71193CF6FE00A08D0F /* OADataFetcher.m in Sources */,
-				FCC5CF7C193CFA1000A08D0F /* RDNearby.m in Sources */,
+				FCC5CF7C193CFA1000A08D0F /* RDYelpNearby.m in Sources */,
 				FCC5CF6C193CF6FE00A08D0F /* Base64Transcoder.c in Sources */,
 				FCC5CF6D193CF6FE00A08D0F /* hmac.c in Sources */,
 				FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */,

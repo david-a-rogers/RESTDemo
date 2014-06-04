@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 David Rogers. All rights reserved.
 //
 
-#import "RDNearby.h"
+#import "RDYelpNearby.h"
 #import "OAuthConsumer.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -17,7 +17,7 @@
 #define TOKEN_SECRET @"NdefZosauWj5YfOniFwo57bJ_Dg"
 
 
-@interface RDNearby ()
+@interface RDYelpNearby ()
 @property (strong, nonatomic) OAConsumer *AuthConsumer;
 @property (strong, nonatomic) OAToken *AuthToken;
 @property (strong, nonatomic) id<OASignatureProviding, NSObject> AuthProvider;
@@ -26,7 +26,7 @@
 
 
 
-@implementation RDNearby
+@implementation RDYelpNearby
 -(id) init {
 	self = [super init];
 	if (self != nil) {
