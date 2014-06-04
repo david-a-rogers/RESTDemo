@@ -19,7 +19,7 @@
 }
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) RDYelpNearby* nearby;
-@property (strong, nonatomic) NSArray* venueArray;
+@property (strong, nonatomic) RDVenueCollection* venueCollection;
 @end
 
 @implementation RDMasterViewController
@@ -49,13 +49,6 @@
 
 - (void)insertNewObject:(id)sender {
     [self.locationManager startUpdatingLocation];
-    
-//    if (!_objects) {
-//        _objects = [[NSMutableArray alloc] init];
-//    }
-//    [_objects insertObject:[NSDate date] atIndex:0];
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Location methods
@@ -75,15 +68,17 @@
     [manager stopUpdatingLocation];
     self.nearby.delegate = self;
     [self.nearby submitLocation: currentLocation];
+    
+    //TODO: dim the + button while the submit is in progress.
 
 }
 
 #pragma mark - Nearby methods
 
-- (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(NSArray*) venueArray {
+- (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(RDVenueCollection*) venueCollection {
     if (success) {
         // Save nearby data
-        self.venueArray = venueArray;
+        self.venueCollection = venueCollection;
         [self.tableView reloadData];
     }
 }
@@ -96,27 +91,23 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.venueArray.count;
+    return self.venueCollection.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RDVenueCell *cell = (RDVenueCell *)[tableView dequeueReusableCellWithIdentifier:@"VenueCell"];
     
     // Configure Cell
-    NSDictionary* venuDict = self.venueArray[indexPath.row];
-    cell.name.text = venuDict[@"name"];
-    // Distance is in meters.  Convert to miles.
-    double distance = [((NSNumber*) venuDict[@"distance"]) doubleValue];
-    distance *= 0.000621371;
-    cell.distance.text = [NSString stringWithFormat: @"%0.2lf miles", distance];
-    cell.type.text = venuDict[@"category"];
-    if ([((NSNumber*) venuDict[@"is_closed"]) boolValue]) {
+    RDVenue* venue = self.venueCollection[indexPath.row];
+    cell.name.text = venue.name;
+    cell.distance.text = [NSString stringWithFormat: @"%0.2lf miles", venue.distanceInMiles.doubleValue];
+    cell.type.text = venue.category;
+    if (venue.isClosed.boolValue) {
         cell.open.text = @"closed";
     } else {
         cell.open.text = @"open";
     }
-    NSURL* imageURL = [NSURL URLWithString:venuDict[@"image_url"]];
-    UIImage* image = [UIImage imageWithData: [NSData dataWithContentsOfURL: imageURL]];
+    UIImage* image = [UIImage imageWithData: [NSData dataWithContentsOfURL: venue.imageUrl]];
     UIImage* sizedImage = [self resizeImage: image];
     cell.imageView.image = sizedImage;
     return cell;
