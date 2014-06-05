@@ -17,15 +17,19 @@
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSNumber* distanceInMeters;
+@property (strong, nonatomic) NSString* phone;
 @property (strong, nonatomic) NSNumber* isClosed;
 @property (strong, nonatomic) NSURL* imageUrl;
 @property (strong, nonatomic) NSString* category;
-@property (strong, nonatomic) NSString* address;
+// An array containing NSStrings representing address lines
+@property (strong, nonatomic) NSArray* address;
+
 
 // Only available at runtime
 @property (strong, nonatomic) UIImage* image;
 
 -(NSNumber*)distanceInMiles;
+-(NSString*)mergedAddress;
 -(NSDictionary*) toVenueDictionary;
 +(RDVenue*) venueFromYelpDictionary: (NSDictionary*) yelpDictionary;
 +(RDVenue*) venueFromVenueDictionary: (NSDictionary*) venueDictionary;

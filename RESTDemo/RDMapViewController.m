@@ -50,7 +50,7 @@
 -(void)placeMapPointFromVenu: (RDVenue*) venu {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     
-    [geocoder geocodeAddressString:venu.address completionHandler:^(NSArray *placemarks, NSError *error) {
+    [geocoder geocodeAddressString:venu.mergedAddress completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
         } else {

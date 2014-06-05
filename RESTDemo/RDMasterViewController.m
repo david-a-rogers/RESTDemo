@@ -266,9 +266,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        RDDetailViewController* detailViewController = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        detailViewController.venue = self.venueCollection[indexPath.row];
     } else if ([[segue identifier] isEqualToString:@"mapSegue"]) {
         RDMapViewController* mapViewController = [segue destinationViewController];
         mapViewController.currentLocation = self.currentLocation;

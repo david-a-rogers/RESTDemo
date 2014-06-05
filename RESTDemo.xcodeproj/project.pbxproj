@@ -29,6 +29,7 @@
 		FCBDA69B1940050300EDB470 /* RDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA69A1940050300EDB470 /* RDMapViewController.m */; };
 		FCBDA69D194005B200EDB470 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBDA69C194005B200EDB470 /* MapKit.framework */; };
 		FCBDA6A01940C87500EDB470 /* RDVenueMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA69F1940C87500EDB470 /* RDVenueMapPoint.m */; };
+		FCBDA6A31940E27A00EDB470 /* UIView+SimpleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA6A21940E27A00EDB470 /* UIView+SimpleLayout.m */; };
 		FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6A193CF6FE00A08D0F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF47193CF6FE00A08D0F /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6B193CF6FE00A08D0F /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF49193CF6FE00A08D0F /* NSURL+Base.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -96,6 +97,8 @@
 		FCBDA69C194005B200EDB470 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FCBDA69E1940C87500EDB470 /* RDVenueMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVenueMapPoint.h; sourceTree = "<group>"; };
 		FCBDA69F1940C87500EDB470 /* RDVenueMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenueMapPoint.m; sourceTree = "<group>"; };
+		FCBDA6A11940E27A00EDB470 /* UIView+SimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SimpleLayout.h"; sourceTree = "<group>"; };
+		FCBDA6A21940E27A00EDB470 /* UIView+SimpleLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SimpleLayout.m"; sourceTree = "<group>"; };
 		FCC5CF44193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
 		FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
 		FCC5CF46193CF6FE00A08D0F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 		FC992CCC193C0B9A00D62C34 /* RESTDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FCBDA6A11940E27A00EDB470 /* UIView+SimpleLayout.h */,
+				FCBDA6A21940E27A00EDB470 /* UIView+SimpleLayout.m */,
 				FCC5CF42193CF6FE00A08D0F /* OAuthConsumer */,
 				FC992CD5193C0B9A00D62C34 /* RDAppDelegate.h */,
 				FC992CD6193C0B9A00D62C34 /* RDAppDelegate.m */,
@@ -431,6 +436,7 @@
 				FCC5CF77193CF6FE00A08D0F /* OAServiceTicket.m in Sources */,
 				FCBDA698193F8D9800EDB470 /* RDIconDownloader.m in Sources */,
 				FCC5CF73193CF6FE00A08D0F /* OAMutableURLRequest.m in Sources */,
+				FCBDA6A31940E27A00EDB470 /* UIView+SimpleLayout.m in Sources */,
 				FCC5CF71193CF6FE00A08D0F /* OADataFetcher.m in Sources */,
 				FCC5CF7C193CFA1000A08D0F /* RDYelpNearby.m in Sources */,
 				FCC5CF6C193CF6FE00A08D0F /* Base64Transcoder.c in Sources */,

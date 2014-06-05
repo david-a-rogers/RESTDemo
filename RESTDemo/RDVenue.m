@@ -10,6 +10,7 @@
 
 #define kYelpNameKey @"name"
 #define kYelpDistanceKey @"distance"
+#define kYelpPhoneKey @"display_phone"
 #define kYelpClosedKey @"is_closed"
 #define kYelpImageUrlKey @"image_url"
 #define kYelpCategoriesKey @"categories"
@@ -18,6 +19,7 @@
 
 #define kVenueNameKey @"name"
 #define kVenueDistanceKey @"distance"
+#define kVenuePhoneKey @"phone"
 #define kVenueClosedKey @"closed"
 #define kVenueImageUrlKey @"imageurl"
 #define kVenueCategoryKey @"category"
@@ -38,6 +40,8 @@
     
     newVenue.distanceInMeters = yelpDictionary[kYelpDistanceKey];
     
+    newVenue.phone = yelpDictionary[kYelpPhoneKey];
+    
     newVenue.isClosed = yelpDictionary[kYelpClosedKey];
     
     newVenue.imageUrl = [NSURL URLWithString: yelpDictionary[kYelpImageUrlKey]];
@@ -53,15 +57,7 @@
         }
     }
     
-    NSMutableString* address = [[NSMutableString alloc] init];
-    NSArray* addressArray = yelpDictionary[kYelpLocationKey][kYelpDisplayAddressKey];
-    for (NSString* addressLine in addressArray) {
-        if (address.length != 0) {
-            [address appendString:@" "];
-        }
-        [address appendString:addressLine];
-    }
-    newVenue.address = address;
+    newVenue.address = yelpDictionary[kYelpLocationKey][kYelpDisplayAddressKey];
     
     return newVenue;
 }
@@ -71,10 +67,22 @@
     return @(distanceInMiles);
 }
 
+-(NSString*)mergedAddress {
+    NSMutableString* address = [[NSMutableString alloc] init];
+    for (NSString* addressLine in self.address) {
+        if (address.length != 0) {
+            [address appendString:@" "];
+        }
+        [address appendString:addressLine];
+    }
+    return address;
+}
+
 -(NSDictionary*) toVenueDictionary {
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     dictionary[kVenueNameKey] = self.name;
     dictionary[kVenueDistanceKey] = self.distanceInMeters;
+    dictionary[kVenuePhoneKey] = self.phone;
     dictionary[kVenueClosedKey] = self.isClosed;
     dictionary[kVenueImageUrlKey] = self.imageUrl.absoluteString;
     dictionary[kVenueCategoryKey] = self.category;
@@ -90,6 +98,7 @@
     
     newVenue.name = venueDictionary[kVenueNameKey];
     newVenue.distanceInMeters = venueDictionary[kVenueDistanceKey];
+    newVenue.phone = venueDictionary[kVenuePhoneKey];
     newVenue.isClosed = venueDictionary[kVenueClosedKey];
     newVenue.imageUrl = [NSURL URLWithString: venueDictionary[kVenueImageUrlKey]];
     newVenue.category = venueDictionary[kVenueCategoryKey];

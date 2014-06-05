@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RDVenue.h"
 
 @interface RDDetailViewController : UIViewController
+@property (weak, nonatomic) RDVenue* venue;
 
-@property (strong, nonatomic) id detailItem;
+// views
+@property (strong, nonatomic) UILabel*  nameLabel;
+@property (strong, nonatomic) UILabel*  addressLabel1;
+@property (strong, nonatomic) UILabel*  addressLabel2;
+@property (strong, nonatomic) UILabel*  addressLabel3;
+@property (strong, nonatomic) UILabel*  phoneLabel;
+@property (strong, nonatomic) UIImageView* imageView;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end
