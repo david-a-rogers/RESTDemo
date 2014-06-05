@@ -42,10 +42,24 @@
     //TODO: nil check
     [self loadFromPersistentData];
     
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    // Add compass button
+    UIImage *roseImage = [UIImage imageNamed:@"compassRose"];
+    UIButton *roseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [roseButton setImage:roseImage forState:UIControlStateNormal];
+    [roseButton sizeToFit];
+    //roseButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+    
+    // Initialize the UIBarButtonItem
+    UIBarButtonItem* roseBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:roseButton];
+    
+    // Set the Target and Action for aButton
+    [roseButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Then you can add the aBarButtonItem to the UIToolbar
+    self.navigationItem.leftBarButtonItem = roseBarButtonItem;
 }
 
 - (void)loadFromPersistentData {
