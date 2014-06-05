@@ -22,8 +22,8 @@
     // Create the controls and set their standard size
     
     self.imageView = [[UIImageView alloc] init];
-    self.imageView.width = 48;
-    self.imageView.height = 48;
+    self.imageView.width = kAppIconSize;
+    self.imageView.height = kAppIconSize;
     [self.view addSubview: self.imageView];
     
     self.nameLabel = [[UILabel alloc] init];

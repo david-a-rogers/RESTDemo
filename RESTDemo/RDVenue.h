@@ -12,6 +12,8 @@
   Represents a single venue's information.
  */
 
+#define kAppIconSize 64
+
 @interface RDVenue : NSObject
 
 

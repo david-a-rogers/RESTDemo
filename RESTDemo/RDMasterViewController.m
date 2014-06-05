@@ -157,6 +157,7 @@
     
     // Configure Cell
     RDVenue* venue = self.venueCollection[indexPath.row];
+    
     cell.name.text = venue.name;
     cell.distance.text = [NSString stringWithFormat: @"%0.2lf miles", venue.distanceInMiles.doubleValue];
     cell.category.text = venue.category;

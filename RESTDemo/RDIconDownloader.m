@@ -9,7 +9,6 @@
 #import "RDIconDownloader.h"
 #import "RDVenue.h"
 
-#define kAppIconSize 48
 
 
 @interface RDIconDownloader ()
