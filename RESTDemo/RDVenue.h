@@ -16,15 +16,16 @@
 
 
 @property (strong, nonatomic) NSString* name;
-@property (strong, nonatomic) NSNumber* distanceInMiles;
+@property (strong, nonatomic) NSNumber* distanceInMeters;
 @property (strong, nonatomic) NSNumber* isClosed;
 @property (strong, nonatomic) NSURL* imageUrl;
 @property (strong, nonatomic) NSString* category;
-//TODO: address
+@property (strong, nonatomic) NSString* address;
 
 // Only available at runtime
 @property (strong, nonatomic) UIImage* image;
 
+-(NSNumber*)distanceInMiles;
 -(NSDictionary*) toVenueDictionary;
 +(RDVenue*) venueFromYelpDictionary: (NSDictionary*) yelpDictionary;
 +(RDVenue*) venueFromVenueDictionary: (NSDictionary*) venueDictionary;

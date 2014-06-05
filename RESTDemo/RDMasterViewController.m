@@ -14,6 +14,7 @@
 #import "RDNearbyDelegate.h"
 #import "RDVenueCell.h"
 #import "RDIconDownloader.h"
+#import "RDMapViewController.h"
 
 @interface RDMasterViewController () <CLLocationManagerDelegate> {
     NSMutableArray *_objects;
@@ -23,6 +24,8 @@
 @property (strong, nonatomic) RDVenueCollection* venueCollection;
 //Dictionary of RDIconDownloaders keyed by indexPath
 @property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
+@property (strong, nonatomic) CLLocation* currentLocation;
+
 @end
 
 @implementation RDMasterViewController
@@ -56,7 +59,7 @@
     UIBarButtonItem* roseBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:roseButton];
     
     // Set the Target and Action for aButton
-    [roseButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
+    [roseButton addTarget:self action:@selector(loadMapController:) forControlEvents:UIControlEventTouchUpInside];
     
     // Then you can add the aBarButtonItem to the UIToolbar
     self.navigationItem.leftBarButtonItem = roseBarButtonItem;
@@ -104,13 +107,13 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation* currentLocation = [locations lastObject];
+    self.currentLocation = [locations lastObject];
 //    NSLog(@"lat = %lf | long = %lf | lat acc = %lf | long acc = %lf",
 //          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
 //          currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
     [manager stopUpdatingLocation];
     self.nearby.delegate = self;
-    [self.nearby submitLocation: currentLocation];
+    [self.nearby submitLocation: self.currentLocation];
     
     //TODO: dim the + button while the submit is in progress.
 
@@ -134,6 +137,10 @@
     }
 }
 
+#pragma mark - Map methods
+- (void)loadMapController:(id)sender {
+    [self performSegueWithIdentifier:@"mapSegue" sender:self];
+}
 
 #pragma mark - Table View
 
@@ -257,15 +264,15 @@
 }
 
 
-
-
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDate *object = _objects[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
+    } else if ([[segue identifier] isEqualToString:@"mapSegue"]) {
+        RDMapViewController* mapViewController = [segue destinationViewController];
+        mapViewController.currentLocation = self.currentLocation;
+        mapViewController.venueCollection = self.venueCollection;
     }
 }
 
