@@ -30,6 +30,10 @@
 		FCBDA69D194005B200EDB470 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBDA69C194005B200EDB470 /* MapKit.framework */; };
 		FCBDA6A01940C87500EDB470 /* RDVenueMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA69F1940C87500EDB470 /* RDVenueMapPoint.m */; };
 		FCBDA6A31940E27A00EDB470 /* UIView+SimpleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA6A21940E27A00EDB470 /* UIView+SimpleLayout.m */; };
+		FCBDA6A419410E3800EDB470 /* RDYelpNearby.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF7B193CFA1000A08D0F /* RDYelpNearby.m */; };
+		FCBDA6A519410E4A00EDB470 /* RDVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA691193F687400EDB470 /* RDVenue.m */; };
+		FCBDA6A619410E4F00EDB470 /* RDVenueCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBDA694193F6EE400EDB470 /* RDVenueCollection.m */; };
+		FCBDA6A8194110C000EDB470 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBDA6A7194110C000EDB470 /* SystemConfiguration.framework */; };
 		FCC5CF69193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6A193CF6FE00A08D0F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF47193CF6FE00A08D0F /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCC5CF6B193CF6FE00A08D0F /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CF49193CF6FE00A08D0F /* NSURL+Base.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -99,6 +103,7 @@
 		FCBDA69F1940C87500EDB470 /* RDVenueMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVenueMapPoint.m; sourceTree = "<group>"; };
 		FCBDA6A11940E27A00EDB470 /* UIView+SimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SimpleLayout.h"; sourceTree = "<group>"; };
 		FCBDA6A21940E27A00EDB470 /* UIView+SimpleLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SimpleLayout.m"; sourceTree = "<group>"; };
+		FCBDA6A7194110C000EDB470 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCC5CF44193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
 		FCC5CF45193CF6FE00A08D0F /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
 		FCC5CF46193CF6FE00A08D0F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCBDA6A8194110C000EDB470 /* SystemConfiguration.framework in Frameworks */,
 				FCBDA69D194005B200EDB470 /* MapKit.framework in Frameworks */,
 				FCC76151193CCE0500B7160B /* CoreLocation.framework in Frameworks */,
 				FC992CC9193C0B9A00D62C34 /* CoreGraphics.framework in Frameworks */,
@@ -188,6 +194,7 @@
 		FC992CC5193C0B9A00D62C34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCBDA6A7194110C000EDB470 /* SystemConfiguration.framework */,
 				FCBDA69C194005B200EDB470 /* MapKit.framework */,
 				FCC76150193CCE0500B7160B /* CoreLocation.framework */,
 				FC992CC6193C0B9A00D62C34 /* Foundation.framework */,
@@ -454,7 +461,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCBDA6A519410E4A00EDB470 /* RDVenue.m in Sources */,
+				FCBDA6A419410E3800EDB470 /* RDYelpNearby.m in Sources */,
 				FC992CF5193C0B9A00D62C34 /* RESTDemoTests.m in Sources */,
+				FCBDA6A619410E4F00EDB470 /* RDVenueCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

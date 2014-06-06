@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "RDNearbyDelegate.h"
 
-@interface RDMasterViewController : UITableViewController <RDNearbyDelegate>
+@interface RDMasterViewController : UITableViewController <RDNearbyDelegate, CLLocationManagerDelegate>
 
 @end

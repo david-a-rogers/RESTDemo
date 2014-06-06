@@ -24,6 +24,7 @@
 @property (strong, nonatomic) OAToken *AuthToken;
 @property (strong, nonatomic) id<OASignatureProviding, NSObject> AuthProvider;
 @property (strong, nonatomic) NSMutableData* connectionData;
+@property (strong, nonatomic) CLLocation* submitLocation;
 @end
 
 
@@ -43,6 +44,7 @@
 }
 
 -(void) submitLocation: (CLLocation*) currentLocation {
+    self.submitLocation = currentLocation;
     NSString* requestString = [NSString stringWithFormat: @"http://api.yelp.com/v2/search?ll=%lf,%lf", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
     NSURL *URL = [NSURL URLWithString:requestString];
     OAMutableURLRequest* request = [[OAMutableURLRequest alloc] initWithURL:URL
@@ -80,7 +82,7 @@
     NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData: self.connectionData options:NSJSONReadingMutableContainers error: &e];
     NSArray* businesses = jsonDict[@"businesses"];
     
-    RDVenueCollection* newCollection = [RDVenueCollection venueCollectionFromYelp: businesses];
+    RDVenueCollection* newCollection = [RDVenueCollection venueCollectionFromYelp: businesses forLocation: self.submitLocation];
     
     self.connectionData = nil;
     

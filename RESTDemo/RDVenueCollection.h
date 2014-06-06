@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "RDVenue.h"
 
 
@@ -20,7 +22,8 @@
 - (NSUInteger)count;
 - (RDVenue*)objectAtIndexedSubscript:(NSUInteger)idx;
 - (BOOL)writeToStorage;
+- (CLLocation*) venueSubmitLocation;
 + (RDVenueCollection*)readFromStorage;
-+ (RDVenueCollection*)venueCollectionFromYelp: (NSArray*) yelpCollection;
++ (RDVenueCollection*)venueCollectionFromYelp: (NSArray*) yelpCollection forLocation:(CLLocation*) location;
 
 @end

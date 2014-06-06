@@ -9,10 +9,12 @@
 #import "RDVenueCollection.h"
 
 #define kPlistName @"venue.plist"
+#define kLocationArchiveName @"locationArchive"
 
 @interface RDVenueCollection ()
 // a list of RDVenue objects
 @property (strong, nonatomic) NSArray* venueList;
+@property (strong, nonatomic) CLLocation* submitLocation;
 @end
 
 @implementation RDVenueCollection
@@ -25,11 +27,12 @@
     return self.venueList[idx];
 }
 
-+ (RDVenueCollection*)venueCollectionFromYelp: (NSArray*) yelpCollection {
++ (RDVenueCollection*)venueCollectionFromYelp: (NSArray*) yelpCollection forLocation:(CLLocation *)location {
     RDVenueCollection* newVenueCollection =  [[RDVenueCollection alloc] init];
     if (yelpCollection == nil) {
         return nil;
     }
+    newVenueCollection.submitLocation = location;
     NSMutableArray* newVenueList = [[NSMutableArray alloc] initWithCapacity:yelpCollection.count];
     for (NSDictionary* yelpDictionary in yelpCollection) {
         RDVenue* newVenue = [RDVenue venueFromYelpDictionary:yelpDictionary];
@@ -46,20 +49,34 @@
     return newVenueCollection;
 }
 
-+ (NSString*) plistPath {
++ (NSString*) venuePlistPath {
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = paths[0];
     NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:kPlistName];
     return plistPath;
 }
 
++ (NSString*) locationArchivePath {
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = paths[0];
+    NSString *archivePath = [documentsDirectory stringByAppendingPathComponent:kLocationArchiveName];
+    return archivePath;
+}
+
 - (BOOL)writeToStorage {
-    NSString* plistPath = [RDVenueCollection plistPath];
+    NSString* plistPath = [RDVenueCollection venuePlistPath];
     
     NSArray* arrayToSave = [self toArrayOfDictionaries];
     BOOL success = [arrayToSave writeToFile:plistPath atomically:YES];
     if (!success) {
-        NSLog(@"%s - Failed to write to storage", __PRETTY_FUNCTION__);
+        NSLog(@"%s - Failed to persist venues", __PRETTY_FUNCTION__);
+    } else {
+        // archive the location for the venues
+        success = [NSKeyedArchiver archiveRootObject:self.submitLocation
+                                              toFile:[RDVenueCollection locationArchivePath]];
+        if (!success) {
+            NSLog(@"%s - Failed to persist location", __PRETTY_FUNCTION__);
+        }
     }
     return success;
 }
@@ -76,7 +93,7 @@
 
 + (RDVenueCollection*)readFromStorage {
     RDVenueCollection* newVenueCollection =  [[RDVenueCollection alloc] init];
-    NSString* plistPath = [RDVenueCollection plistPath];
+    NSString* plistPath = [RDVenueCollection venuePlistPath];
     NSArray* venueDictionaryArray = [NSArray arrayWithContentsOfFile: plistPath];
     if (venueDictionaryArray == nil) {
         return nil;
@@ -88,10 +105,17 @@
         [venueList addObject: newVenue];
     }
     newVenueCollection.venueList = venueList;
+    
+    newVenueCollection.submitLocation = [NSKeyedUnarchiver unarchiveObjectWithFile: [RDVenueCollection locationArchivePath]];
+    if (newVenueCollection.submitLocation == nil) {
+        return nil;
+    }
     return newVenueCollection;
 }
 
-
+- (CLLocation*) venueSubmitLocation {
+    return self.submitLocation;
+}
 
 
 

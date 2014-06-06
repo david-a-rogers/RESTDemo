@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 David Rogers. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
-
+#import <SystemConfiguration/SystemConfiguration.h>
 #import "RDMasterViewController.h"
 #import "RDDetailViewController.h"
 #import "RDYelpNearby.h"
@@ -17,7 +16,7 @@
 #import "RDMapViewController.h"
 
 @interface RDMasterViewController () <CLLocationManagerDelegate> {
-    NSMutableArray *_objects;
+    BOOL seekingLocation;
 }
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) RDYelpNearby* nearby;
@@ -25,6 +24,7 @@
 //Dictionary of RDIconDownloaders keyed by indexPath
 @property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @property (strong, nonatomic) CLLocation* currentLocation;
+@property (strong, nonatomic) UIButton* roseButton;
 
 @end
 
@@ -42,31 +42,38 @@
     self.title = @"Locations";
     [self initLocation];
     self.nearby = [[RDYelpNearby alloc] init];
-    //TODO: nil check
-    [self loadFromPersistentData];
+    
+    
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
     // Add compass button
     UIImage *roseImage = [UIImage imageNamed:@"compassRose"];
-    UIButton *roseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [roseButton setImage:roseImage forState:UIControlStateNormal];
-    [roseButton sizeToFit];
+    self.roseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *grayRoseImage = [UIImage imageNamed:@"compassRose"];
+    [self.roseButton setImage:roseImage forState:UIControlStateNormal];
+    [self.roseButton setImage:grayRoseImage forState:UIControlStateDisabled];
+    [self.roseButton sizeToFit];
     //roseButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
     
     // Initialize the UIBarButtonItem
-    UIBarButtonItem* roseBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:roseButton];
+    UIBarButtonItem* roseBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.roseButton];
     
     // Set the Target and Action for aButton
-    [roseButton addTarget:self action:@selector(loadMapController:) forControlEvents:UIControlEventTouchUpInside];
+    [self.roseButton addTarget:self action:@selector(loadMapController:) forControlEvents:UIControlEventTouchUpInside];
     
     // Then you can add the aBarButtonItem to the UIToolbar
     self.navigationItem.leftBarButtonItem = roseBarButtonItem;
+
+    // Start the ball rolling
+    [self requestLocation];
+
 }
 
 - (void)loadFromPersistentData {
     self.venueCollection = [RDVenueCollection readFromStorage];
+    self.currentLocation = [self.venueCollection venueSubmitLocation];
     
     if (self.venueCollection == nil) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"REST Demo"
@@ -76,6 +83,13 @@
                                               otherButtonTitles:nil];
         [alert show];
         return;
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"REST Demo"
+                                                        message: @"No internet connection. Using saved data"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
     
     // terminate all pending download connections
@@ -83,9 +97,6 @@
     [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
     [self.imageDownloadsInProgress removeAllObjects];
     
-    // Save nearby data
-    //[self.tableView reloadData];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,10 +105,19 @@
 }
 
 - (void)insertNewObject:(id)sender {
-    [self.locationManager startUpdatingLocation];
+    [self requestLocation];
 }
 
 #pragma mark - Location methods
+
+- (void)requestLocation {
+    if ([self isConnectionAvailable]) {
+        seekingLocation = YES;
+        [self.locationManager startUpdatingLocation];
+    } else {
+        [self loadFromPersistentData];
+    }
+}
 
 - (void) initLocation {
     self.locationManager = [[CLLocationManager alloc] init];
@@ -107,13 +127,17 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    self.currentLocation = [locations lastObject];
-//    NSLog(@"lat = %lf | long = %lf | lat acc = %lf | long acc = %lf",
-//          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
-//          currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
     [manager stopUpdatingLocation];
-    self.nearby.delegate = self;
-    [self.nearby submitLocation: self.currentLocation];
+    // Location manager doesn't always stop immediately
+    if (seekingLocation) {
+        seekingLocation = NO;
+        self.currentLocation = [locations lastObject];
+        //    NSLog(@"lat = %lf | long = %lf | lat acc = %lf | long acc = %lf",
+        //          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
+        //          currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
+        self.nearby.delegate = self;
+        [self.nearby submitLocation: self.currentLocation];
+    }
     
     //TODO: dim the + button while the submit is in progress.
 
@@ -124,7 +148,15 @@
 - (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(RDVenueCollection*) venueCollection {
     if (success) {
         //Persist venu data
-        [venueCollection writeToStorage];
+        BOOL success = [venueCollection writeToStorage];
+        if (!success) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"REST Demo"
+                                                            message: @"Failed to save venue information. Storage may be full."
+                                                           delegate: nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
         
         // terminate all pending download connections
         NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
@@ -139,6 +171,16 @@
 
 #pragma mark - Map methods
 - (void)loadMapController:(id)sender {
+    if (![self isConnectionAvailable]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"REST Demo"
+                                                        message: @"No internet connection. Can't do maps."
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
     [self performSegueWithIdentifier:@"mapSegue" sender:self];
 }
 
@@ -190,14 +232,6 @@
     return NO;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
 
 /*
 // Override to support rearranging the table view.
@@ -277,4 +311,22 @@
     }
 }
 
+#pragma mark - Internet Access
+
+- (BOOL) isConnectionAvailable
+{
+	SCNetworkReachabilityFlags flags;
+    BOOL receivedFlags;
+    
+    SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(CFAllocatorGetDefault(), [@"dipinkrishna.com" UTF8String]);
+    receivedFlags = SCNetworkReachabilityGetFlags(reachability, &flags);
+    CFRelease(reachability);
+    
+    if (!receivedFlags || (flags == 0) )
+    {
+        return FALSE;
+    } else {
+		return TRUE;
+	}
+}
 @end
