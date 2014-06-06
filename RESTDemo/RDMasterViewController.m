@@ -37,14 +37,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self setupNavBar];
+    
     self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
 
-    self.title = @"Locations";
     [self initLocation];
     self.nearby = [[RDYelpNearby alloc] init];
-    
-    
-    
+
+    // Start the ball rolling
+    [self requestLocation];
+
+}
+
+- (void) setupNavBar {
+    self.title = @"Locations";
+
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
@@ -65,9 +72,6 @@
     
     // Then you can add the aBarButtonItem to the UIToolbar
     self.navigationItem.leftBarButtonItem = roseBarButtonItem;
-
-    // Start the ball rolling
-    [self requestLocation];
 
 }
 
