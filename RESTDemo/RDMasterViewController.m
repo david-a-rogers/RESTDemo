@@ -209,8 +209,10 @@
     cell.category.text = venue.category;
     if (venue.isClosed.boolValue) {
         cell.open.text = @"closed";
+        cell.open.textColor = [UIColor lightTextColor];
     } else {
         cell.open.text = @"open";
+        cell.open.textColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.0 alpha:1.0];
     }
     
     // Only load cached images; defer new downloads until scrolling ends
