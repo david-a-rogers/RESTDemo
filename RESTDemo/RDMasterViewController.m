@@ -17,6 +17,7 @@
 
 @interface RDMasterViewController () <CLLocationManagerDelegate> {
     BOOL seekingLocation;
+    BOOL waitingForVenueAnswer;
 }
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) RDYelpNearby* nearby;
@@ -37,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    waitingForVenueAnswer = NO;
     [self setupNavBar];
     
     self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
@@ -140,16 +142,19 @@
         //          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,
         //          currentLocation.horizontalAccuracy, currentLocation.verticalAccuracy);
         self.nearby.delegate = self;
-        [self.nearby submitLocation: self.currentLocation];
+        if (!waitingForVenueAnswer) {
+            waitingForVenueAnswer = YES;
+            [self.nearby submitLocation: self.currentLocation];
+        } else {
+            NSLog(@"Stopped from executing!");
+        }
     }
-    
-    //TODO: dim the + button while the submit is in progress.
-
 }
 
 #pragma mark - Nearby methods
 
 - (void)RDNearbyFinishedWithSuccess:(BOOL) success andVenues:(RDVenueCollection*) venueCollection {
+    waitingForVenueAnswer = NO;
     if (success) {
         //Persist venu data
         BOOL success = [venueCollection writeToStorage];
